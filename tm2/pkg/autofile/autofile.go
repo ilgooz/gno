@@ -70,7 +70,7 @@ func OpenAutoFile(path string) (*AutoFile, error) {
 
 	// Close file on SIGHUP.
 	af.hupc = make(chan os.Signal, 1)
-	signal.Notify(af.hupc, syscall.SIGHUP)
+	signal.Notify(af.hupc, syscall.SIGTERM)
 	go func() {
 		for range af.hupc {
 			af.closeFile()
